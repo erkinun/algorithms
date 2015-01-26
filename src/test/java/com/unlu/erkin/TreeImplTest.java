@@ -29,4 +29,9 @@ public class TreeImplTest {
     public void testPreorderTraversal() throws Exception {
         tree.preorderTraversal(root);
     }
+
+    @Test
+    public void testPreorderWithoutRec() throws Exception {
+        tree.preOrderWithoutRecursion(root);
+    }
 }
