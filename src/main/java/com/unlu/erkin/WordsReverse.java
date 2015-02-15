@@ -8,7 +8,9 @@ import java.util.Stack;
 public class WordsReverse {
 
     public static void main(String[] args) {
-         System.out.println(reverse("Hey you! out there in the dark, will you help me?"));
+        System.out.println(reverse("Hey you! out there in the dark, will you help me?"));
+
+        System.out.println(reverseWord("whatup yo?"));
     }
 
     private static String reverse(String sentence) {
@@ -33,6 +35,18 @@ public class WordsReverse {
         while (!stack.empty()) {
             String word = stack.pop();
             builder.append(word).append(" ");
+        }
+
+        return builder.toString();
+    }
+
+    public static String reverseWord(String word) {
+        char[] wordArray = word.toCharArray();
+
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = wordArray.length - 1; i >= 0; i--) {
+            builder.append(wordArray[i]);
         }
 
         return builder.toString();
