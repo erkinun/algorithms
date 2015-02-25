@@ -5,7 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 /**
  * Created by ERKIN on 15/02/15.
@@ -100,5 +102,32 @@ public class PhoneQuestions {
 
         scanner.close();
         writer.close();
+    }
+
+    private static Integer[][] commonsAndDifferences(int[] first, int[] second) {
+        Integer[][] sets = new Integer[3][];
+
+        Set<Integer> firstSet = new HashSet<>();
+        for (Integer i : first) {
+            firstSet.add(i);
+        }
+
+        Set<Integer> secondSet = new HashSet<>();
+        for (Integer i : second) {
+            secondSet.add(i);
+        }
+
+        Set<Integer> thirdSet = new HashSet<>();
+        firstSet.stream().filter(i -> secondSet.contains(i)).forEach(i -> {
+            firstSet.remove(i);
+            secondSet.remove(i);
+            thirdSet.add(i);
+        });
+
+        sets[1] = (Integer[])firstSet.toArray();
+        sets[2] = (Integer[])secondSet.toArray();
+        sets[3] = (Integer[])thirdSet.toArray();
+
+        return sets;
     }
 }
