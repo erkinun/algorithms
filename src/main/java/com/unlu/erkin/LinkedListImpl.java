@@ -1,10 +1,12 @@
 package com.unlu.erkin;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import java.util.Stack;
 
 /**
  * Created by ERKIN on 25/01/15.
@@ -23,6 +25,20 @@ public class LinkedListImpl<T> {
         Node newHead = removeDups(node);
 
         newHead.print();
+
+        //Node secd = removeDupsWithoutBuffer(node);
+
+        //secd.print();
+
+        Node secNode = new Node('a');
+        secNode.append('b');
+        secNode.append('c');
+        secNode.append('d');
+        secNode.append('e');
+
+        Node nth = nthToLastElem(secNode, 2);
+
+        nth.print();
     }
 
     public List<T> flatten (Node<T> head) {
@@ -105,5 +121,46 @@ public class LinkedListImpl<T> {
         }
 
         return newHead;
+    }
+
+    private static Node removeDupsWithoutBuffer(Node head) {
+        Node cur = head;
+
+        while (cur.next != null) {
+            Node runner = cur.next;
+            Node previous = cur;
+            while (runner != null) {
+                if (runner.val == cur.val) {
+                    //delete
+                    previous.next = runner.next;
+                }
+
+                runner = runner.next;
+                previous = previous.next;
+            }
+
+            cur = cur.next;
+        }
+
+        return head;
+    }
+
+    private static Node nthToLastElem(Node head, int n) {
+        Node cur = head;
+        Stack<Node> nodeStack = new Stack<>();
+
+        while (cur.next != null) {
+            nodeStack.push(cur);
+            cur = cur.next;
+        }
+
+        nodeStack.push(cur);
+
+        Node ret = null;
+        for (int i = 0; i < n; i++) {
+            ret = nodeStack.pop();
+        }
+
+        return ret;
     }
 }
