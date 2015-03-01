@@ -191,4 +191,42 @@ public class LinkedListImpl<T> {
         elem.val = next.val;
         elem.next = next.next;
     }
+
+    private static int toInt(Node<Integer> head) {
+        if (head == null) { return 0; }
+
+        int digit = 0; int sum = 0;
+
+        Node cur = head;
+        while (cur != null) {
+            int power = (int) Math.pow(10, digit++);
+            sum += power * (int)cur.val;
+            cur = cur.next;
+        }
+
+        return sum;
+    }
+
+    private static Node<Integer> toNode(int number) {
+        int remainder = number;
+
+        Node head = new Node(remainder % 10);
+        remainder /= 10;
+
+        while (remainder > 0) {
+            head.append(remainder % 10);
+            remainder /= 10;
+        }
+
+        return head;
+    }
+
+    public static Node addListsAsIntS(Node num1, Node num2) {
+        int i1 = toInt(num1);
+        int i2 = toInt(num2);
+
+        int result = i1 + i2;
+
+        return toNode(result);
+    }
 }
