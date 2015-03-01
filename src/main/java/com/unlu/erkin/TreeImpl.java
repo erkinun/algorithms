@@ -5,6 +5,8 @@ package com.unlu.erkin;
  * Created by ERKIN on 25/12/14.
  */
 
+import java.util.ArrayDeque;
+import java.util.Queue;
 import java.util.Stack;
 
 /**
@@ -35,7 +37,15 @@ public class TreeImpl<T extends Comparable> {
         insert(root, 5);
         insert(root, 4);
 
-        preorderTraversal(root);
+        breadthFirstTraversal(root);
+        System.out.println();
+
+        System.out.println(isBalanced(root));
+
+        insert(root, 13);
+        insert(root, 14);
+
+        System.out.println(isBalanced(root));
     }
 
     public static void preorderTraversal(Node node) {
@@ -47,6 +57,23 @@ public class TreeImpl<T extends Comparable> {
         System.out.println(node.value);
         preorderTraversal(node.left);
         preorderTraversal(node.right);
+    }
+
+    public static void breadthFirstTraversal(Node node) {
+        if (node == null) {
+            return;
+        }
+
+        Queue<Node> nodes = new ArrayDeque<>();
+        nodes.add(node);
+
+        while (!nodes.isEmpty()) {
+            Node cur = nodes.remove();
+            if (cur.left != null) { nodes.add(cur.left); }
+            if (cur.right != null) { nodes.add(cur.right); }
+
+            System.out.print(cur.value + " ");
+        }
     }
 
     public static void preOrderWithoutRecursion(Node node) {
@@ -149,5 +176,16 @@ public class TreeImpl<T extends Comparable> {
         }
 
         return node;
+    }
+
+    public static boolean isBalanced(Node root) {
+        if (root == null) {
+            return false;
+        }
+
+        int left = depth(root.left, 1);
+        int right = depth(root.right, 1);
+
+        return Math.abs(left - right) <= 1;
     }
 }
