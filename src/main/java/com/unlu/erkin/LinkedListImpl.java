@@ -39,6 +39,18 @@ public class LinkedListImpl<T> {
         Node nth = nthToLastElem(secNode, 2);
 
         nth.print();
+
+
+        Node third = new Node('x');
+        Node y = new Node('y');
+        third.append(y);
+        third.append(new Node('z'));
+
+        third.print();
+
+        deleteNode(y);
+
+        third.print();
     }
 
     public List<T> flatten (Node<T> head) {
@@ -83,6 +95,15 @@ public class LinkedListImpl<T> {
             }
 
             cur.next = new Node(val);
+        }
+
+        public void append(Node node) {
+            Node cur = this;
+            while (cur.next != null) {
+                cur = cur.next;
+            }
+
+            cur.next = node;
         }
 
         public void print() {
@@ -162,5 +183,12 @@ public class LinkedListImpl<T> {
         }
 
         return ret;
+    }
+
+    private static void deleteNode(Node elem) {
+        Node next = elem.next;
+
+        elem.val = next.val;
+        elem.next = next.next;
     }
 }
