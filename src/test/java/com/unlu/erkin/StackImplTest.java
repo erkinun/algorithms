@@ -45,4 +45,21 @@ public class StackImplTest {
         stack.push(3);
 
     }
+
+    @Test
+    public void testMin() throws Exception {
+        stack.push(3);
+        stack.push(2);
+
+        assertEquals(2, (int)stack.getMin());
+
+        stack.push(1);
+        stack.push(0);
+
+        assertEquals(0, (int)stack.getMin());
+
+        stack.pop();
+
+        assertEquals(1, (int)stack.getMin());
+    }
 }
