@@ -10,7 +10,7 @@ import java.util.Stack;
 /**
  * Binary Tree Implementation
  */
-public class TreeImpl<T> {
+public class TreeImpl<T extends Comparable> {
 
     private Node<T> root;
 
@@ -19,9 +19,21 @@ public class TreeImpl<T> {
     }
 
     public static void main(String[] args) {
-        int[] sorted = new int[] {1,2,3,4,5,6};
+        //int[] sorted = new int[] {1,2,3,4,5,6};
 
-        Node root = convert(sorted, 0, 5);
+        //Node root = convert(sorted, 0, 5);
+
+        //preorderTraversal(root);
+
+
+        Node root = new Node(10);
+        insert(root, 12);
+        insert(root, 7);
+        insert(root, 11);
+        insert(root, 9);
+        insert(root, 1);
+        insert(root, 5);
+        insert(root, 4);
 
         preorderTraversal(root);
     }
@@ -57,7 +69,7 @@ public class TreeImpl<T> {
         }
     }
 
-    public static class Node<T> {
+    public static class Node<T extends Comparable> {
         private T value;
         private Node<T> left;
         private Node<T> right;
@@ -105,6 +117,36 @@ public class TreeImpl<T> {
 
         node.left = convert(array, start, mid-1);
         node.right = convert(array, mid+1, end);
+
+        return node;
+    }
+
+    private static int depth(Node root, int curDepth) {
+        if (root == null) { return curDepth - 1; }
+
+        if (root.left == null && root.right == null) { return curDepth; }
+
+        int left = depth(root.left, curDepth+1);
+        int right = depth(root.right, curDepth+1);
+
+        if (left >= right) { return left; }
+        else { return right; }
+    }
+
+    public static Node insert(Node node, Comparable val) {
+
+        if (node == null) {
+            node = new Node(val);
+            return node;
+        }
+
+        if (node.value.compareTo(val) == 0) { return node; }
+        else if (node.value.compareTo(val) < 0) {
+            node.right = insert(node.right, val);
+        }
+        else {
+            node.left = insert(node.left, val);
+        }
 
         return node;
     }
