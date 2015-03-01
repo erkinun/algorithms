@@ -9,6 +9,7 @@ import java.util.concurrent.ExecutionException;
 
 import static com.unlu.erkin.LinkedListImpl.Node;
 
+import static com.unlu.erkin.LinkedListImpl.findCyclicNode;
 import static org.junit.Assert.*;
 
 public class LinkedListImplTest {
@@ -84,6 +85,22 @@ public class LinkedListImplTest {
         assertNotNull(res);
 
         res.print();
+    }
+
+    @Test
+    public void testCyclicNode() throws Exception {
+        Node head = new Node('A');
+        head.append('B');
+        Node cyclic = new Node('C');
+        head.append(cyclic);
+        head.append('D');
+        head.append('E');
+        head.append(cyclic);
+
+
+        Node res = findCyclicNode(head);
+
+        assertEquals(res, cyclic);
     }
 
 }

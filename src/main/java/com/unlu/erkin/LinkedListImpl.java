@@ -229,4 +229,20 @@ public class LinkedListImpl<T> {
 
         return toNode(result);
     }
+
+    public static Node findCyclicNode(Node head) {
+        Set<Node> visitedNodes = new HashSet<>();
+
+        Node cur = head;
+        while (cur != null) {
+            if (visitedNodes.contains(cur)) {
+                return cur;
+            }
+
+            visitedNodes.add(cur);
+            cur = cur.next;
+        }
+
+        return null;
+    }
 }
