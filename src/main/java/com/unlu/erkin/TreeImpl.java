@@ -6,6 +6,9 @@ package com.unlu.erkin;
  */
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -46,6 +49,15 @@ public class TreeImpl<T extends Comparable> {
         insert(root, 14);
 
         System.out.println(isBalanced(root));
+
+        List<List<Node>> treeAsList = listsOfTree(root);
+
+        for (List<Node> nodes : treeAsList) {
+            for (Node nd : nodes) {
+                System.out.print(nd.value + ",");
+            }
+            System.out.println();
+        }
     }
 
     public static void preorderTraversal(Node node) {
@@ -187,5 +199,45 @@ public class TreeImpl<T extends Comparable> {
         int right = depth(root.right, 1);
 
         return Math.abs(left - right) <= 1;
+    }
+
+    public static List<List<Node>> listsOfTree(Node node) {
+
+        if (node == null) {
+            throw new NullPointerException("tree null!");
+        }
+
+        List<List<Node>> listOfLists = new ArrayList<>();
+
+        int elem = 1;
+        int childCount = 0;
+
+        List<Node> curList = new ArrayList<>();
+        Queue<Node> nodeQueue = new LinkedList<>();
+        nodeQueue.add(node);
+
+        while (elem > 0) {
+            Node nd = nodeQueue.remove();
+            elem--;
+
+            if (nd.left != null) {
+                nodeQueue.add(nd.left);
+                childCount++;
+            }
+            if (nd.right != null) {
+                nodeQueue.add(nd.right);
+                childCount++;
+            }
+
+            curList.add(nd);
+
+            if (elem == 0) {
+                elem = childCount;
+                childCount = 0;
+                listOfLists.add(curList);
+                curList = new ArrayList<>();
+            }
+        }
+        return listOfLists;
     }
 }
