@@ -11,6 +11,9 @@ public class DigitFinder {
 
         System.out.println(str2Int("456"));
         System.out.println(str2Int("-456"));
+
+        System.out.println(int2Str(4234));
+        System.out.println(int2Str(-4552));
     }
 
     public static int findPages(int digit, int occ) {
@@ -71,5 +74,37 @@ public class DigitFinder {
 
     private static int digit(char c) {
         return c - '0';
+    }
+
+    private static char toChar(int digit) {
+        char res = '0';
+        for (int i = 0; i < digit; i++) {
+            res++;
+        }
+
+        return res;
+    }
+
+    private static String int2Str(int number) {
+        boolean neg = number < 0;
+
+        StringBuilder builder = new StringBuilder();
+        int rem;
+
+        if (neg) {
+            number = Math.abs(number);
+        }
+
+        while (number > 0) {
+            rem = number % 10;
+            builder.append(toChar(rem));
+            number /= 10;
+        }
+
+        if (neg) {
+            builder.append('-');
+        }
+
+        return builder.reverse().toString();
     }
 }
