@@ -8,6 +8,9 @@ public class DigitFinder {
     public static void main(String[] args) {
 
         System.out.println(findPages(4, 0));
+
+        System.out.println(str2Int("456"));
+        System.out.println(str2Int("-456"));
     }
 
     public static int findPages(int digit, int occ) {
@@ -43,5 +46,30 @@ public class DigitFinder {
         }
 
         return occr;
+    }
+
+    private static int str2Int(String num) {
+        char[] number = num.toCharArray();
+
+        boolean neg = false;
+
+        if (number[0] == '-') {
+            neg = true;
+        }
+
+        int finish = neg ? 1 : 0;
+
+        int step = 0;
+        int sum = 0;
+        for (int i = number.length-1; i >= finish; i--) {
+            sum += digit(number[i]) * (Math.pow(10, step++));
+        }
+
+        return neg ? -sum : sum;
+
+    }
+
+    private static int digit(char c) {
+        return c - '0';
     }
 }
