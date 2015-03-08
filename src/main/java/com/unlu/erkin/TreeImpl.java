@@ -78,13 +78,28 @@ public class TreeImpl<T extends Comparable> {
 
         Queue<Node> nodes = new ArrayDeque<>();
         nodes.add(node);
+        int childCount = 0;
+        int elem = 1;
 
         while (!nodes.isEmpty()) {
             Node cur = nodes.remove();
-            if (cur.left != null) { nodes.add(cur.left); }
-            if (cur.right != null) { nodes.add(cur.right); }
+            elem -= 1;
+            if (cur.left != null) {
+                nodes.add(cur.left);
+                childCount += 1;
+            }
+            if (cur.right != null) {
+                nodes.add(cur.right);
+                childCount += 1;
+            }
 
             System.out.print(cur.value + " ");
+
+            if (elem == 0) {
+                System.out.println();
+                elem = childCount;
+                childCount = 0;
+            }
         }
     }
 
