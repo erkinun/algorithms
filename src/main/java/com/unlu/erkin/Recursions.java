@@ -12,6 +12,8 @@ public class Recursions {
         binarySearch(sorted, 1);
         binarySearch(sorted, 4);
         binarySearch(sorted, 7);
+
+        perms("", "hat");
     }
 
     private static void binarySearch(int[] sorted, int num) {
@@ -37,6 +39,20 @@ public class Recursions {
         }
         else {
             innerBinary(sorted, num, index+1, end);
+        }
+    }
+
+    private static void perms(String perm, String word) {
+        if (word == null || word.length() == 0) {
+            System.out.println(perm);
+            return;
+        }
+
+        int i = 0;
+        for (Character c : word.toCharArray()) {
+            StringBuilder builder = new StringBuilder(word);
+            perms(perm + c, builder.deleteCharAt(i).toString());
+            i++;
         }
     }
 }
