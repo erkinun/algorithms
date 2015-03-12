@@ -1,3 +1,4 @@
 google_training.iml
 .idea/
 build/
+.gradle/
