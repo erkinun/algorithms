@@ -2,7 +2,6 @@ package com.unlu.erkin;
 
 import java.util.Arrays;
 import java.util.Random;
-
 /**
  * Created by unlue on 12/03/15.
  */
