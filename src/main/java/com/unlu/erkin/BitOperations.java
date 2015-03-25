@@ -17,6 +17,9 @@ public class BitOperations {
         System.out.println("hede is now: " + hede);
 
         System.out.println("we have to change for 31 and 14: " + setCountDiff(31, 14));
+
+        System.out.println("number of bits in 8: " + bitSet(8));
+        System.out.println("number of bits in 5: " + bitSet(5));
     }
 
     public static void bitSubstring(int n, int m, int start, int j) {
@@ -62,5 +65,20 @@ public class BitOperations {
         }
 
         return Math.abs(a1 - b1);
+    }
+
+    public static int bitSet(int number) {
+
+        int bitCount = 0;
+
+        //what if the number is negative?
+        while (number > 0) {
+            if ((number & 0x01) == 1) {
+                bitCount++;
+            }
+            number = number >> 1;
+        }
+
+        return bitCount;
     }
 }

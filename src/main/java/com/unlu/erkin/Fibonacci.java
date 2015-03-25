@@ -9,8 +9,8 @@ package com.unlu.erkin;
 public class Fibonacci {
 
     public static void main(String[] args) {
-        System.out.println(fibRecursive(5));
-        System.out.println(fibIter(6));
+        System.out.println(fibRecursive(6));
+        System.out.println(fibIter(3));
     }
 
     public static int fibRecursive(int n) {
