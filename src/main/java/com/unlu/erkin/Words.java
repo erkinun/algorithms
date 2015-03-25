@@ -8,6 +8,8 @@ public class Words {
     //TODO should also work on odd lengthed number stringsum
     public static void main(String[] args) {
         System.out.println(nextPalindrome("1392"));
+
+        System.out.println(removeDuplicates("tree traversal"));
     }
 
     private static int nextPalindrome(String number) {
@@ -54,5 +56,31 @@ public class Words {
             }
         }
 
+    }
+
+    public static String removeDuplicates(String word) {
+        char[] stringA = word.toCharArray();
+
+        boolean[] hit = new boolean[256];
+
+        for (int i = 0; i < 256; i++) {
+            hit[i] = false;
+        }
+
+        hit[stringA[0]] = true;
+        int tail = 1;
+
+        int len = word.length();
+        for (int i = 1; i < len; i++) {
+            if (!hit[stringA[i]]) {
+                //unique char
+                stringA[tail] = stringA[i];
+                tail++;
+                hit[stringA[i]] = true;
+            }
+        }
+
+
+        return new String(stringA).substring(0, tail);
     }
 }
