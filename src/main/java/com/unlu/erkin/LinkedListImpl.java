@@ -14,43 +14,21 @@ import java.util.Stack;
 public class LinkedListImpl<T> {
 
     public static void main(String[] args) {
-        Node node = new Node(5);
-        node.append(4);
+
+        Node node;
+
+        node = new Node(5);
         node.append(4);
         node.append(3);
-        node.append(3);
+        node.append(2);
+        node.append(1);
 
         node.print();
 
-        Node newHead = removeDups(node);
+        node = reverse(node, null);
 
-        newHead.print();
-
-        //Node secd = removeDupsWithoutBuffer(node);
-
-        //secd.print();
-
-        Node secNode = new Node('a');
-        secNode.append('b');
-        secNode.append('c');
-        secNode.append('d');
-        secNode.append('e');
-
-        Node nth = nthToLastElem(secNode, 2);
-
-        nth.print();
-
-
-        Node third = new Node('x');
-        Node y = new Node('y');
-        third.append(y);
-        third.append(new Node('z'));
-
-        third.print();
-
-        deleteNode(y);
-
-        third.print();
+        System.out.println("printing reverse: ");
+        node.print();
     }
 
     public List<T> flatten (Node<T> head) {
@@ -245,4 +223,37 @@ public class LinkedListImpl<T> {
 
         return null;
     }
+
+    public static Node reverse(Node head, Node carry) {
+        if (head == null) {
+            return carry;
+        }
+
+        Node remain = head.next;
+
+        Node newHead;
+        newHead = new Node(head.val);
+        if (carry != null) {
+            newHead.next = carry;
+        }
+
+        return reverse(remain, newHead);
+    }
+
+    private static Node addToLast(Node carry, Node head) {
+        if (carry == null) {
+            return head;
+        }
+
+        Node temp = carry;
+        while (temp.next != null) {
+            temp = temp.next;
+        }
+
+        temp.next = head;
+
+        return carry;
+    }
+
+
 }
