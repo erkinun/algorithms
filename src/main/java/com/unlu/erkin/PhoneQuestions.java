@@ -22,7 +22,9 @@ public class PhoneQuestions {
 
         merge(new int[]{10,5,4,1}, new int[]{9,8,7,5,0});
 
-        printToFile();
+        //printToFile();
+
+        System.out.println(findLonelyInteger(new int[] {1,3,2,3,2}));
     }
 
     public static int fibNth(int n) {
@@ -128,5 +130,30 @@ public class PhoneQuestions {
         sets[3] = (Integer[])thirdSet.toArray();
 
         return sets;
+    }
+
+    private static int findLonelyInteger(int[] array) {
+
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+
+        int[] vals = new int[max + 1];
+
+        for (int i = 0; i < array.length; i++) {
+            vals[array[i]] ^= array[i];
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            if (vals[i] != 0) {
+                return i;
+            }
+        }
+
+        return -1;
     }
 }
