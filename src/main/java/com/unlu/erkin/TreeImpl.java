@@ -58,6 +58,10 @@ public class TreeImpl<T extends Comparable> {
             }
             System.out.println();
         }
+
+        Node n1 = new Node(10);
+        System.out.println(isSameTree(root, n1));
+        System.out.println(isSameTree(root, root));
     }
 
     public static void preorderTraversal(Node node) {
@@ -254,5 +258,23 @@ public class TreeImpl<T extends Comparable> {
             }
         }
         return listOfLists;
+    }
+
+    public static boolean isSameTree(Node n1, Node n2) {
+
+        if (n1 == null && n2 == null) {
+            return true;
+        }
+
+        if (n1 == null || n2 == null) {
+            return false;
+        }
+
+        if (!n1.value.equals(n2.value)) {
+            return false;
+        }
+
+
+        return isSameTree(n1.left, n2.left) && isSameTree(n1.right, n2.right);
     }
 }
