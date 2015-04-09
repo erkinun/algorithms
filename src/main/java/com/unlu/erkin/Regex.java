@@ -35,10 +35,23 @@ public class Regex {
             System.out.println(matcher.group());
         }
 
-        String nameAndMail = "erkin, erkinun@gmail.com";
+        String nameAndMail = "erkin, erkinun at gmail dot com";
 
-        pattern = pattern.compile("\\w+@\\w+\\.\\w+");
+        pattern = Pattern.compile("\\w+@\\w+\\.\\w+");
         pattern.matcher(nameAndMail);
+
+        while (matcher.find()) {
+            System.out.println(matcher
+                    .group());
+        }
+
+        String forever = "for3v3r";
+
+        pattern = Pattern.compile("[0-9]+");
+        matcher = pattern.matcher(forever);
+
+
+        System.out.println(forever.matches("\\d+"));
 
         while (matcher.find()) {
             System.out.println(matcher.group());
