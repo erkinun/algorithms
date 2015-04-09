@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -25,6 +26,16 @@ public class PhoneQuestions {
         //printToFile();
 
         System.out.println(findLonelyInteger(new int[] {1,3,2,3,2}));
+
+        int[] a = new int[5];
+        a[0] = 4;
+        a[1] = 5;
+        a[2] = 6;
+
+        int[] b = new int[] {1,2};
+        merge(a, b, 2, 1);
+
+        System.out.println(Arrays.toString(a));
     }
 
     public static int fibNth(int n) {
@@ -155,5 +166,28 @@ public class PhoneQuestions {
         }
 
         return -1;
+    }
+
+    private static void merge(int[] a, int[] b, int m, int n) {
+        //a => 4,5,6,_,_
+        //b => 1,2
+
+        int k = m + n + 1;
+
+        while (m >= 0 && n >= 0) {
+            if (a[m] >= b[n]) {
+                a[k--] = a[m--];
+            }
+            else {
+                a[k--] = b[n--];
+            }
+        }
+
+        if (m < 0) {
+            //A is finished
+            while (n >= 0) {
+                a[k--] = b[n--];
+            }
+        }
     }
 }
