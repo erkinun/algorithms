@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
@@ -22,7 +23,25 @@ public class PhoneQuestions {
 
         merge(new int[]{10,5,4,1}, new int[]{9,8,7,5,0});
 
-        printToFile();
+        //printToFile();
+
+        System.out.println(findLonelyInteger(new int[] {1,3,2,3,2}));
+
+        int[] a = new int[5];
+        a[0] = 4;
+        a[1] = 5;
+        a[2] = 6;
+
+        int[] b = new int[] {1,2};
+        merge(a, b, 2, 1);
+
+//        System.out.println(Arrays.toString(a));
+
+        int[] c = new int[] {-4, 2, 100};
+
+        System.out.println(Arrays.toString(mergeShort(c, b)));
+
+        System.out.println(Arrays.toString(mergeSort(new int[] {100, 5,1, 10024, -5})));
     }
 
     public static int fibNth(int n) {
@@ -128,5 +147,91 @@ public class PhoneQuestions {
         sets[3] = (Integer[])thirdSet.toArray();
 
         return sets;
+    }
+
+    private static int findLonelyInteger(int[] array) {
+
+        int max = Integer.MIN_VALUE;
+
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+
+        int[] vals = new int[max + 1];
+
+        for (int i = 0; i < array.length; i++) {
+            vals[array[i]] ^= array[i];
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            if (vals[i] != 0) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    private static void merge(int[] a, int[] b, int m, int n) {
+        //a => 4,5,6,_,_
+        //b => 1,2
+
+        int k = m + n + 1;
+
+        while (m >= 0 && n >= 0) {
+            if (a[m] >= b[n]) {
+                a[k--] = a[m--];
+            }
+            else {
+                a[k--] = b[n--];
+            }
+        }
+
+        if (m < 0) {
+            //A is finished
+            while (n >= 0) {
+                a[k--] = b[n--];
+            }
+        }
+    }
+
+    private static int[] mergeShort(int[] a, int[] b) {
+        int[] merged = new int[a.length + b.length];
+
+        int i = 0, j = 0, m = 0;
+
+        while (i < a.length && j < b.length) {
+            if (a[i] <= b[j]) {
+                merged[m++] = a[i++];
+            }
+            else {
+                merged[m++] = b[j++];
+            }
+        }
+
+        while (i < a.length) {
+            merged[m++] = a[i++];
+        }
+        while (j < b.length) {
+            merged[m++] = b[j++];
+        }
+
+        return merged;
+    }
+
+    private static int[] mergeSort(int[] a) {
+        if (a.length == 1 || a.length == 0) {
+            return a;
+        }
+
+        int[] left = Arrays.copyOfRange(a, 0, a.length / 2);
+        int[] right = Arrays.copyOfRange(a, a.length / 2, a.length);
+
+        left = mergeSort(left);
+        right = mergeSort(right);
+
+        return mergeShort(left, right);
     }
 }
