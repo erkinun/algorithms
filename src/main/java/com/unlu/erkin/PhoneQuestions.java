@@ -35,7 +35,13 @@ public class PhoneQuestions {
         int[] b = new int[] {1,2};
         merge(a, b, 2, 1);
 
-        System.out.println(Arrays.toString(a));
+//        System.out.println(Arrays.toString(a));
+
+        int[] c = new int[] {-4, 2, 100};
+
+        System.out.println(Arrays.toString(mergeShort(c, b)));
+
+        System.out.println(Arrays.toString(mergeSort(new int[] {100, 5,1, 10024, -5})));
     }
 
     public static int fibNth(int n) {
@@ -189,5 +195,43 @@ public class PhoneQuestions {
                 a[k--] = b[n--];
             }
         }
+    }
+
+    private static int[] mergeShort(int[] a, int[] b) {
+        int[] merged = new int[a.length + b.length];
+
+        int i = 0, j = 0, m = 0;
+
+        while (i < a.length && j < b.length) {
+            if (a[i] <= b[j]) {
+                merged[m++] = a[i++];
+            }
+            else {
+                merged[m++] = b[j++];
+            }
+        }
+
+        while (i < a.length) {
+            merged[m++] = a[i++];
+        }
+        while (j < b.length) {
+            merged[m++] = b[j++];
+        }
+
+        return merged;
+    }
+
+    private static int[] mergeSort(int[] a) {
+        if (a.length == 1 || a.length == 0) {
+            return a;
+        }
+
+        int[] left = Arrays.copyOfRange(a, 0, a.length / 2);
+        int[] right = Arrays.copyOfRange(a, a.length / 2, a.length);
+
+        left = mergeSort(left);
+        right = mergeSort(right);
+
+        return mergeShort(left, right);
     }
 }
