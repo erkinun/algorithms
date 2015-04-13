@@ -56,5 +56,24 @@ public class Regex {
         while (matcher.find()) {
             System.out.println(matcher.group());
         }
+
+        String username = "#erkin_'23";
+        String usernameRegex = "[a-zA-Z0-9_-]{3,16}]";
+
+        System.out.println(username.matches(usernameRegex));
+
+        pattern = Pattern.compile(usernameRegex);
+        matcher = pattern.matcher("erk");
+
+        System.out.println(matcher.find());
+
+        System.out.printf("%x", 1986 );
+
+        /**
+         * try (Writer writer = new BufferedWriter(new OutputStreamWriter(
+         new FileOutputStream("filename.txt"), "utf-8"))) {
+         writer.write("something");
+         }
+         */
     }
 }
