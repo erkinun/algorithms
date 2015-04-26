@@ -21,6 +21,7 @@ public class LinkedListImpl<T> {
         node.append(4);
         node.append(3);
         node.append(2);
+        node.append(5);
         node.append(1);
 
         node.print();
@@ -34,10 +35,10 @@ public class LinkedListImpl<T> {
 
         Node<Integer> lt = new Node<>();
         Node<Integer> gt = new Node<>();
-        split(node, 3, lt, gt);
 
-        lt.print();
-        gt.print();
+        Node removed = removeElements(node, 5);
+
+        removed.print();
     }
 
     public List<T> flatten (Node<T> head) {
@@ -284,5 +285,53 @@ public class LinkedListImpl<T> {
 
             current = current.next;
         }
+    }
+
+    private static Node remove(Node<Integer> head, int val) {
+        Node<Integer> current = head;
+
+        Node prev = null;
+        while (current != null) {
+            if (current.val == val) {
+               if (prev == null) {
+                   return current.next;
+               }
+               else {
+                   Node next = current.next;
+                   prev.next = next;
+                   break;
+               }
+            }
+            else {
+                prev = current;
+                current = current.next;
+            }
+        }
+
+        return head;
+    }
+
+    private static Node removeElements(Node<Integer> head, int val) {
+        Node<Integer> current = head;
+        Node<Integer> currentHead = head;
+
+        Node prev = null;
+        while (current != null) {
+            if (current.val == val) {
+                if (prev == null) {
+                    currentHead = current.next;
+                }
+                else {
+                    Node next = current.next;
+                    prev.next = next;
+                }
+            }
+            else {
+                prev = current;
+            }
+            current = current.next;
+        }
+
+        return currentHead;
     }
 }
