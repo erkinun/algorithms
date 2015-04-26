@@ -29,6 +29,15 @@ public class LinkedListImpl<T> {
 
         System.out.println("printing reverse: ");
         node.print();
+
+        node = reverse(node, null);
+
+        Node<Integer> lt = new Node<>();
+        Node<Integer> gt = new Node<>();
+        split(node, 3, lt, gt);
+
+        lt.print();
+        gt.print();
     }
 
     public List<T> flatten (Node<T> head) {
@@ -86,12 +95,15 @@ public class LinkedListImpl<T> {
 
         public void print() {
             StringBuilder builder = new StringBuilder();
+            builder.append("[");
 
             Node cur = this;
-            while (cur != null) {
-                builder.append(",node: " + cur.val);
+            while (cur != null && cur.val != null) {
+                builder.append(cur.val + ", ");
                 cur = cur.next;
             }
+
+            builder.append("]");
 
             System.out.println(builder.toString());
         }
@@ -255,5 +267,22 @@ public class LinkedListImpl<T> {
         return carry;
     }
 
+    private static void split(Node<Integer> head, int pivot, Node<Integer> lt, Node<Integer> gt) {
+        Node<Integer> current = head;
 
+        while (current != null) {
+            if (current.val < pivot) {
+                lt.val = current.val;
+                lt.next = new Node();
+                lt = lt.next;
+            }
+            else {
+                gt.val = current.val;
+                gt.next = new Node();
+                gt = gt.next;
+            }
+
+            current = current.next;
+        }
+    }
 }
