@@ -43,6 +43,8 @@ public class TreeImpl<T extends Comparable> {
         breadthFirstTraversal(root);
         System.out.println();
 
+        printInOrder(root);
+
         System.out.println(isBalanced(root));
 
         insert(root, 13);
@@ -276,5 +278,15 @@ public class TreeImpl<T extends Comparable> {
 
 
         return isSameTree(n1.left, n2.left) && isSameTree(n1.right, n2.right);
+    }
+
+    public static void printInOrder(Node root) {
+        if (root == null) {
+            return;
+        }
+
+        printInOrder(root.left);
+        System.out.println(root.value);
+        printInOrder(root.right);
     }
 }
