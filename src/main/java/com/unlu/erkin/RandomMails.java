@@ -2,6 +2,7 @@ package com.unlu.erkin;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,6 +15,11 @@ public class RandomMails {
 
     public static void main(String[] args) throws FileNotFoundException {
         System.out.println(RandomMails.randomMail("files/emails.txt"));
+
+        System.out.println("rand: " + generateBetween(0,100));
+        System.out.println("rand2: " + generateBetween(0, 100));
+
+        System.out.println(-11 % 2);
     }
 
     private static String randomMail(String fileName) throws FileNotFoundException {
@@ -27,8 +33,22 @@ public class RandomMails {
         int length = mails.size();
         Random random = new Random();
 
-        int index = random.nextInt() % length;
+        int index = Math.abs(random.nextInt()) % length;
 
         return mails.get(index);
+    }
+
+    private static int generateBetween(int start, int end) {
+
+        if (start >= end) {
+            throw new IllegalArgumentException("start must be smaller than end");
+        }
+
+        SecureRandom random = new SecureRandom();
+
+        int interval = end - start;
+        int gen = Math.abs(random.nextInt() % interval) + start;
+
+        return gen;
     }
 }
