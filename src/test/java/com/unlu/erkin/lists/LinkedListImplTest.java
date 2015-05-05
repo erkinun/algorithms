@@ -1,15 +1,15 @@
-package com.unlu.erkin;
+package com.unlu.erkin.lists;
 
+import com.unlu.erkin.lists.LinkedListImpl;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
-import static com.unlu.erkin.LinkedListImpl.Node;
+import static com.unlu.erkin.lists.LinkedListImpl.Node;
 
-import static com.unlu.erkin.LinkedListImpl.findCyclicNode;
+import static com.unlu.erkin.lists.LinkedListImpl.findCyclicNode;
 import static org.junit.Assert.*;
 
 public class LinkedListImplTest {

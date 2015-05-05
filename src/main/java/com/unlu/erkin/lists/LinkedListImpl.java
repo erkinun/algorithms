@@ -1,4 +1,4 @@
-package com.unlu.erkin;
+package com.unlu.erkin.lists;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
