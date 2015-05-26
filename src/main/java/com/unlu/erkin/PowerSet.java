@@ -1,8 +1,6 @@
 package com.unlu.erkin;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 /**
  * Created by ERKIN on 15/02/15.
@@ -43,5 +41,28 @@ public class PowerSet {
         }
 
         return power;
+    }
+
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+
+        Arrays.sort(nums);
+
+        Set<List<Integer>> subsets = new HashSet<List<Integer>>();
+        subsets.add(new ArrayList<>());
+
+        for (int i = 0; i < nums.length; i++) {
+            Set<List<Integer>> temps = new HashSet<List<Integer>>();
+
+            for (List<Integer> set : subsets) {
+                List<Integer> temp = new ArrayList<>(set);
+                temp.add(nums[i]);
+                temps.add(temp);
+            }
+
+            subsets.addAll(temps);
+        }
+        List<List<Integer>> res = new ArrayList<List<Integer>>();
+        res.addAll(subsets);
+        return res;
     }
 }
