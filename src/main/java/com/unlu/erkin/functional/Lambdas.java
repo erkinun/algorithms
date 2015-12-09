@@ -3,12 +3,17 @@ package com.unlu.erkin.functional;
 import javaslang.Function3;
 import javaslang.collection.List;
 
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
  * Created by ERKIN on 13/06/15.
  */
 public class Lambdas {
+
+    public int add5(int a) {
+        return a + 5;
+    }
 
     private static Function<Integer, Character> i2Char = integer -> {
         char c = '0';
@@ -49,5 +54,10 @@ public class Lambdas {
         List<Integer> imp = slangList.map(inte -> ++inte);
 
         imp.forEach(System.out::println);
+
+        BiFunction<Lambdas, Integer, Integer> addSmth = Lambdas::add5;
+        int res = addSmth.apply(new Lambdas(), 10);
+
+        System.out.println(res);
     }
 }
