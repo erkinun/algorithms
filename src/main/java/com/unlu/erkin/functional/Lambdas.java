@@ -1,7 +1,7 @@
 package com.unlu.erkin.functional;
 
+import javaslang.Function3;
 import javaslang.collection.List;
-import javaslang.control.Try;
 
 import java.util.function.Function;
 
@@ -36,7 +36,8 @@ public class Lambdas {
         return builder.toString();
     };
 
-    private static TriFunction<Integer, Integer, Integer, Integer> threeSum = (integer, integer2, integer3) -> {
+    //:)
+    private static Function3<Integer, Integer, Integer, Integer> threeSum = (integer, integer2, integer3) -> {
         return integer + integer2 + integer3;
     };
 
